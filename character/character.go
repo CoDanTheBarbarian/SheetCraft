@@ -446,7 +446,7 @@ func (c *Character) GetSkillMod(skill string) (int, error) {
 
 // Race, Subrace and Class applications
 
-func (c *Character) AssignRace(r *rd.Race) {
+func (c *Character) AssignRace(r rd.Race) {
 	c.RaceName = r.Name
 	c.Speed = r.Speed
 	if len(r.StatBonus) > 0 {
@@ -467,7 +467,7 @@ func (c *Character) AssignRace(r *rd.Race) {
 	}
 }
 
-func (c *Character) AssignSubrace(s *rd.SubRace) {
+func (c *Character) AssignSubrace(s rd.SubRace) {
 	c.SubraceName = s.Name
 	if len(s.StatBonus) > 0 {
 		for _, increase := range s.StatBonus {
@@ -478,7 +478,7 @@ func (c *Character) AssignSubrace(s *rd.SubRace) {
 	c.GainResistances(s.Resistances)
 }
 
-func (c *Character) AssignDragonColor(d *rd.DragonColor) {
+func (c *Character) AssignDragonColor(d rd.DragonColor) {
 	c.SubraceName = d.Name
 	if len(d.StatBonus) > 0 {
 		for _, increase := range d.StatBonus {

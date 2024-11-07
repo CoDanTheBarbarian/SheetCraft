@@ -1,6 +1,7 @@
 package character
 
 import (
+	character "SheetCraft/character/races"
 	"reflect"
 	"testing"
 )
@@ -513,5 +514,58 @@ func TestSetMaxHP(t *testing.T) {
 	c.SetMaxHP()
 	if c.HP != 22 {
 		t.Errorf("Expected HP to be 22, but got %d", c.HP)
+	}
+}
+
+func TestSpellAttackMod(t *testing.T) {
+	c, _ := NewCharacter("Test")
+	c.SpellCastingAbility = "Charisma"
+	mod := c.SpellAttackMod()
+	if mod != 1 {
+		t.Errorf("Expected spell mod to be 1, but got: %d", mod)
+	}
+	saveDC := c.SpellSaveDC()
+	if saveDC != 9 {
+		t.Errorf("Expected spell save dc to be 9, but got %d", saveDC)
+	}
+	c.AssignStat("Charisma", 20)
+	mod = c.SpellAttackMod()
+	if mod != 7 {
+		t.Errorf("Expected spell mod to be 7, but got: %d", mod)
+	}
+	saveDC = c.SpellSaveDC()
+	if saveDC != 15 {
+		t.Errorf("Expected spell save dc to be 15, but got %d", saveDC)
+	}
+}
+
+func TestAssignRace(t *testing.T) {
+	c, _ := NewCharacter("Test")
+	raceData, err := character.GetRaceData("Dwarf")
+	if err != nil {
+		t.Errorf("Expected err to be nil, but got: %v", err)
+	}
+	c.AssignRace(raceData)
+	if c.RaceName != "Dwarf" {
+		t.Errorf("Expected race name to be 'Dwarf', but got: %s", c.RaceName)
+	}
+	if c.Constitution != 10 {
+		t.Errorf("Expected Constitution to be 10, but got: %d", c.Constitution)
+	}
+	if !c.Proficiencies["Battle Axe"] || !c.Proficiencies["Handaxe"] || !c.Proficiencies["Light Hammer"] || !c.Proficiencies["Warhammer"] {
+		t.Error("Proficiencies not registered properly")
+	}
+	if !c.DamageResistance["Poison"] {
+		t.Error("Expected poison damage resistance to be true")
+	}
+	expectedTraits := map[string]string{
+		"Darkvision":         "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+		"Dwarven Resilience": "You have advantage on saving throws against poison, and resistance against poison damage.",
+		"Stonecunning":       "Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check.",
+	}
+	for _, trait := range c.RaceInfo {
+		if explanation, exists := expectedTraits[trait.Trait]; !exists || explanation != trait.Info {
+			t.Errorf("Race trait info incorrectly assigned for trait: %s, got: %+v", trait.Trait, trait.Info)
+		}
 	}
 }
