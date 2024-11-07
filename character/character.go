@@ -476,6 +476,7 @@ func (c *Character) AssignSubrace(s rd.SubRace) {
 	}
 	c.GainProficiencies(s.Proficiencies)
 	c.GainResistances(s.Resistances)
+	c.Speed += s.SpeedBonus
 }
 
 func (c *Character) AssignDragonColor(d rd.DragonColor) {

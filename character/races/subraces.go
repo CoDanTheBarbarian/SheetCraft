@@ -88,7 +88,7 @@ var SubRaces = map[string]SubRace{
 		},
 		Resistances: []string{},
 		HpBonus:     0,
-		SpeedBonus:  0,
+		SpeedBonus:  5,
 	},
 	"Dark Elf (Drow)": {
 		Name: "Dark Elf (Drow)",

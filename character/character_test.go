@@ -569,3 +569,39 @@ func TestAssignRace(t *testing.T) {
 		}
 	}
 }
+
+func TestAssignSubrace(t *testing.T) {
+	c, _ := NewCharacter("Test")
+	srData, err := character.GetSubraceData("Mountain Dwarf")
+	if err != nil {
+		t.Errorf("expected nil error, but got %v", err)
+	}
+	c.AssignSubrace(srData)
+	if c.SubraceName != "Mountain Dwarf" {
+		t.Errorf("Expected subrace name to be 'Mountain Dwarf', but got: %s", c.SubraceName)
+	}
+	if c.Strength != 10 {
+		t.Errorf("Expected Strength to be 10, but got: %d", c.Strength)
+	}
+	if !c.Proficiencies["Light Armor"] || !c.Proficiencies["Medium Armor"] {
+		t.Errorf("Proficiencies not set correctly")
+	}
+	c2, _ := NewCharacter("Speed bonus")
+	srData2, err := character.GetSubraceData("Wood Elf")
+	if err != nil {
+		t.Errorf("expected nil error, but got %v", err)
+	}
+	c2.AssignSubrace(srData2)
+	if c2.SubraceName != "Wood Elf" {
+		t.Errorf("Expected subrace name to be 'Wood Elf', but got: %s", c2.SubraceName)
+	}
+	if c2.Wisdom != 9 {
+		t.Errorf("Expected Wisdom to be 9, but got: %d", c2.Wisdom)
+	}
+	if !c2.Proficiencies["Long Sword"] || !c2.Proficiencies["Short Sword"] || !c2.Proficiencies["Long Bow"] || !c2.Proficiencies["Short Bow"] {
+		t.Errorf("Proficiencies not set correctly")
+	}
+	if c2.Speed != 5 {
+		t.Errorf("Expected speed to increase by 5 to 5, but got: %d", c2.Speed)
+	}
+}

@@ -8,7 +8,7 @@ import (
 func TestGetSubraceData(t *testing.T) {
 	tests := []struct {
 		name          string
-		expectedData  SubRace
+		expectedData  SubRace //injected from the map in subraces file
 		expectedError bool
 	}{
 		{
@@ -186,6 +186,246 @@ func TestGetSubraceData(t *testing.T) {
 			}
 			if !reflect.DeepEqual(subraceData, test.expectedData) {
 				t.Errorf("expected: %+v, got %+v", test.expectedData, subraceData)
+			}
+		})
+	}
+}
+
+func TestGetDragonColorData(t *testing.T) {
+	tests := []struct {
+		name          string
+		expectedData  DragonColor //injected from the map in subraces file
+		expectedError bool
+	}{
+		{
+			name: "Black Dragonborn",
+			expectedData: DragonColor{
+				Name: "Black Dragonborn",
+				StatBonus: []struct {
+					Stat  string
+					Bonus int
+				}{}, // No Stat bonuses
+				Proficiencies: []string{}, // No proficiencies
+				Resistances:   []string{"acid"},
+				BreathWeapon: struct {
+					BreathShape string
+					BreathSize  []int
+					BreathType  string
+				}{
+					BreathShape: "Line",
+					BreathSize:  []int{5, 30},
+					BreathType:  "Acid",
+				},
+			},
+			expectedError: false,
+		},
+		{
+			name: "Blue Dragonborn",
+			expectedData: DragonColor{
+				Name: "Blue Dragonborn",
+				StatBonus: []struct {
+					Stat  string
+					Bonus int
+				}{}, // No Stat bonuses
+				Proficiencies: []string{}, // No proficiencies
+				Resistances:   []string{"Lightning"},
+				BreathWeapon: struct {
+					BreathShape string
+					BreathSize  []int
+					BreathType  string
+				}{
+					BreathShape: "Line",
+					BreathSize:  []int{5, 30},
+					BreathType:  "Lightning",
+				},
+			},
+			expectedError: false,
+		},
+		{
+			name: "Brass Dragonborn",
+			expectedData: DragonColor{
+				Name: "Brass Dragonborn",
+				StatBonus: []struct {
+					Stat  string
+					Bonus int
+				}{}, // No Stat bonuses
+				Proficiencies: []string{}, // No proficiencies
+				Resistances:   []string{"Fire"},
+				BreathWeapon: struct {
+					BreathShape string
+					BreathSize  []int
+					BreathType  string
+				}{
+					BreathShape: "Line",
+					BreathSize:  []int{5, 30},
+					BreathType:  "Fire",
+				},
+			},
+			expectedError: false,
+		},
+		{
+			name: "Bronze Dragonborn",
+			expectedData: DragonColor{
+				Name: "Bronze Dragonborn",
+				StatBonus: []struct {
+					Stat  string
+					Bonus int
+				}{}, // No Stat bonuses
+				Proficiencies: []string{}, // No proficiencies
+				Resistances:   []string{"Lightning"},
+				BreathWeapon: struct {
+					BreathShape string
+					BreathSize  []int
+					BreathType  string
+				}{
+					BreathShape: "Line",
+					BreathSize:  []int{5, 30},
+					BreathType:  "Lightning",
+				},
+			},
+			expectedError: false,
+		},
+		{
+			name: "Copper Dragonborn",
+			expectedData: DragonColor{
+				Name: "Copper Dragonborn",
+				StatBonus: []struct {
+					Stat  string
+					Bonus int
+				}{}, // No Stat bonuses
+				Proficiencies: []string{}, // No proficiencies
+				Resistances:   []string{"Acid"},
+				BreathWeapon: struct {
+					BreathShape string
+					BreathSize  []int
+					BreathType  string
+				}{
+					BreathShape: "Line",
+					BreathSize:  []int{5, 30},
+					BreathType:  "Acid",
+				},
+			},
+			expectedError: false,
+		},
+		{
+			name: "Gold Dragonborn",
+			expectedData: DragonColor{
+				Name: "Gold Dragonborn",
+				StatBonus: []struct {
+					Stat  string
+					Bonus int
+				}{}, // No Stat bonuses
+				Proficiencies: []string{}, // No proficiencies
+				Resistances:   []string{"Fire"},
+				BreathWeapon: struct {
+					BreathShape string
+					BreathSize  []int
+					BreathType  string
+				}{
+					BreathShape: "Cone",
+					BreathSize:  []int{15},
+					BreathType:  "Fire",
+				},
+			},
+			expectedError: false,
+		},
+		{
+			name: "Green Dragonborn",
+			expectedData: DragonColor{
+				Name: "Green Dragonborn",
+				StatBonus: []struct {
+					Stat  string
+					Bonus int
+				}{}, // No Stat bonuses
+				Proficiencies: []string{}, // No proficiencies
+				Resistances:   []string{"Poison"},
+				BreathWeapon: struct {
+					BreathShape string
+					BreathSize  []int
+					BreathType  string
+				}{
+					BreathShape: "Cone",
+					BreathSize:  []int{15},
+					BreathType:  "Poison",
+				},
+			},
+			expectedError: false,
+		},
+		{
+			name: "Red Dragonborn",
+			expectedData: DragonColor{
+				Name: "Red Dragonborn",
+				StatBonus: []struct {
+					Stat  string
+					Bonus int
+				}{}, // No Stat bonuses
+				Proficiencies: []string{}, // No proficiencies
+				Resistances:   []string{"Fire"},
+				BreathWeapon: struct {
+					BreathShape string
+					BreathSize  []int
+					BreathType  string
+				}{
+					BreathShape: "Cone",
+					BreathSize:  []int{15},
+					BreathType:  "Fire",
+				},
+			},
+			expectedError: false,
+		},
+		{
+			name: "Silver Dragonborn",
+			expectedData: DragonColor{
+				Name: "Silver Dragonborn",
+				StatBonus: []struct {
+					Stat  string
+					Bonus int
+				}{}, // No Stat bonuses
+				Proficiencies: []string{}, // No proficiencies
+				Resistances:   []string{"Cold"},
+				BreathWeapon: struct {
+					BreathShape string
+					BreathSize  []int
+					BreathType  string
+				}{
+					BreathShape: "Cone",
+					BreathSize:  []int{15},
+					BreathType:  "Cold",
+				},
+			},
+			expectedError: false,
+		},
+		{
+			name: "White Dragonborn",
+			expectedData: DragonColor{
+				Name: "White Dragonborn",
+				StatBonus: []struct {
+					Stat  string
+					Bonus int
+				}{}, // No Stat bonuses
+				Proficiencies: []string{}, // No proficiencies
+				Resistances:   []string{"Cold"},
+				BreathWeapon: struct {
+					BreathShape string
+					BreathSize  []int
+					BreathType  string
+				}{
+					BreathShape: "Cone",
+					BreathSize:  []int{15},
+					BreathType:  "Cold",
+				},
+			},
+			expectedError: false,
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			dragonData, err := GetDragonColorData(test.name)
+			if (err != nil) != test.expectedError {
+				t.Errorf("unexpected error state: got %v, want %v", err != nil, test.expectedError)
+			}
+			if !reflect.DeepEqual(dragonData, test.expectedData) {
+				t.Errorf("expected: %+v, got %+v", test.expectedData, dragonData)
 			}
 		})
 	}
