@@ -549,3 +549,5 @@ func (c *Character) SpellSaveDC() int {
 	}
 	return 0
 }
+
+// Inventory and Equipment Methods
